@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><title>札の一覧(確認用)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Yuji+Syuku&display=swap">
+<style>body{margin:0;background:#e9dfc8;font-family:sans-serif}#w{display:flex;flex-wrap:wrap;gap:6px;padding:8px}canvas{display:block}</style></head>
+<body><div id="w"></div>
+<script src="../js/core.js"></script><script src="../js/data.js"></script><script src="../js/rules.js"></script><script src="../js/run.js"></script><script src="../js/art.js"></script>
+<script>
+async function go(){
+  try { await document.fonts.load('40px "Yuji Syuku"', 'あかよろしみよの寿神並上極幻進化札'); await document.fonts.load('800 20px "Shippori Mincho B1"', '一二三四五六七八九十光種短金銀朱藍漆'); } catch(e){}
+  const w=document.getElementById('w'); const q=new URLSearchParams(location.search); const s=+(q.get('s')||1);
+  const W=Math.round(100*s), H=Math.round(160*s);
+  const add=(fn,ww,hh)=>{const cv=document.createElement('canvas');cv.width=ww;cv.height=hh;cv.style.width=ww+'px';fn(cv.getContext('2d'));w.appendChild(cv);};
+  const mode=q.get('m')||'cards';
+  if(mode==='cards'){ for(let f=0;f<48;f++){ add(c=>ART.cardTo(c,{u:f+1,f,m:D.FACES[f].m,e:null,s:null},W,H),W,H);} 
+    const ex=[{f:0,m:1,e:'kin',s:'kasane'},{f:21,m:3,e:'shu',s:'fuku'},{f:30,m:8,e:'ai',s:'inori'},{f:44,m:12,e:'gin'},{f:9,m:3,e:'urushi'}];
+    ex.forEach((c,i)=>add(cx=>ART.cardTo(cx,Object.assign({u:900+i},c),W,H),W,H)); add(c=>ART.backTo(c,W,H),W,H);}
+  if(mode==='kami'){ D.KAMI.forEach(d=>add(c=>ART.kamiTo(c,d,W,H),W,H)); }
+  if(mode==='oma'){ D.OMA.forEach(d=>add(c=>ART.omaTo(c,d,W,Math.round(140*s)),W,Math.round(140*s))); Object.keys(D.PACKS).forEach(t=>add(c=>ART.packTo(c,t,W,Math.round(140*s)),W,Math.round(140*s)));
+    D.OPPS.forEach(o=>add(c=>ART.emblemTo(c,o.kj,o.col,W,W),W,W)); D.BOSSES.forEach(b=>add(c=>ART.emblemTo(c,b.kj,'#c99a2e',W,W,{boss:1}),W,W)); }
+  if(mode==='washi'){ const cv=document.createElement('canvas'); cv.style.width='390px'; cv.style.height='844px'; ART.washi(cv,390,844,2); w.appendChild(cv);} 
+  document.title='ready';
+}
+go();
+</script></body></html>

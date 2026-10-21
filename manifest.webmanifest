@@ -1,0 +1,20 @@
+{
+  "name": "花暦 HANAGOYOMI",
+  "short_name": "花暦",
+  "description": "花札で役を作って点を稼ぐ、考える系のローグライク。十二か月を乗り切れ。",
+  "lang": "ja",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone"],
+  "orientation": "any",
+  "background_color": "#2a1d15",
+  "theme_color": "#2a1d15",
+  "categories": ["games"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
